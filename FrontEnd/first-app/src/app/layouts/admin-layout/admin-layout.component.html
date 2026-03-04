@@ -1,0 +1,86 @@
+<div class="h-screen flex overflow-hidden bg-gray-100">
+  <!-- Sidebar -->
+  <div 
+    class="bg-blue-900 text-white w-64 flex-shrink-0 flex flex-col transition-all duration-300 z-20 absolute inset-y-0 left-0 transform md:relative md:translate-x-0 transition duration-200 ease-in-out bg-blue-900 w-64"
+    [class.-ml-64]="!sidebarOpen()"
+    [class.ml-0]="sidebarOpen()">
+    
+    <div class="h-16 flex items-center px-6 bg-blue-950 font-bold text-xl tracking-wider">
+      CIPMS Admin
+    </div>
+
+    <div class="flex-1 overflow-y-auto py-4">
+      <nav class="px-2 space-y-1">
+        <a routerLink="/admin/dashboard" routerLinkActive="bg-blue-800 text-white border-white" class="group flex items-center px-4 py-3 text-sm font-medium rounded-md text-blue-100 hover:bg-blue-800 hover:text-white border-l-4 border-transparent transition-colors">
+          <svg class="mr-3 h-5 w-5 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Dashboard
+        </a>
+        <a routerLink="/admin/users" routerLinkActive="bg-blue-800 text-white border-white" class="group flex items-center px-4 py-3 text-sm font-medium rounded-md text-blue-100 hover:bg-blue-800 hover:text-white border-l-4 border-transparent transition-colors">
+          <svg class="mr-3 h-5 w-5 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          Users
+        </a>
+        <a routerLink="/admin/insurance" routerLinkActive="bg-blue-800 text-white border-white" class="group flex items-center px-4 py-3 text-sm font-medium rounded-md text-blue-100 hover:bg-blue-800 hover:text-white border-l-4 border-transparent transition-colors">
+          <svg class="mr-3 h-5 w-5 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          Insurance
+        </a>
+        <a routerLink="/admin/analytics" routerLinkActive="bg-blue-800 text-white border-white" class="group flex items-center px-4 py-3 text-sm font-medium rounded-md text-blue-100 hover:bg-blue-800 hover:text-white border-l-4 border-transparent transition-colors">
+          <svg class="mr-3 h-5 w-5 text-blue-300 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+          </svg>
+          Analytics
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top Navbar -->
+    <header class="h-16 bg-white shadow-sm flex items-center justify-between px-4 sm:px-6 lg:px-8 z-10 transition-all duration-300">
+      <div class="flex items-center">
+        <button (click)="toggleSidebar()" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 md:hidden mr-4">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <h1 class="text-xl font-semibold text-gray-800 hidden md:block">CIPMS Management</h1>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <button class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none">
+          <span class="sr-only">View notifications</span>
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+          </svg>
+          <span *ngIf="unreadCount() > 0" class="absolute top-1 right-1 block items-center justify-center h-4 w-4 rounded-full bg-red-500 text-white text-[10px] font-bold ring-2 ring-white">
+            {{ unreadCount() > 99 ? '99+' : unreadCount() }}
+          </span>
+        </button>
+        
+        <div class="flex items-center space-x-3 border-l border-gray-200 pl-4">
+          <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-800 font-bold uppercase">
+            {{ userInitials() }}
+          </div>
+          <span class="text-sm font-medium text-gray-700 hidden sm:block">{{ currentUser()?.fullName }}</span>
+          <button (click)="logout()" class="ml-2 text-sm font-medium text-red-600 hover:text-red-800 transition-colors">
+            Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-50 p-4 sm:p-6 lg:p-8">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  
+  <!-- Mobile sidebar overlay -->
+  <div *ngIf="sidebarOpen()" (click)="toggleSidebar()" class="fixed inset-0 bg-gray-600 bg-opacity-75 z-10 md:hidden"></div>
+</div>

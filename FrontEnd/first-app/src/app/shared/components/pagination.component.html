@@ -1,0 +1,35 @@
+<nav class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6" aria-label="Pagination">
+  <div class="hidden sm:block">
+    <p class="text-sm text-gray-700">
+      Showing page <span class="font-medium">{{ currentPage }}</span> of <span class="font-medium">{{ totalPages }}</span>
+    </p>
+  </div>
+  <div class="flex flex-1 justify-between sm:justify-end gap-2">
+    <button 
+      (click)="onPrev()" 
+      [disabled]="currentPage <= 1"
+      class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+      Previous
+    </button>
+    <div class="hidden sm:flex space-x-2">
+      @for (page of visiblePages(); track page) {
+        <button (click)="onPage(page)"
+          [class.bg-blue-600]="page === currentPage"
+          [class.text-white]="page === currentPage"
+          [class.border-blue-600]="page === currentPage"
+          [class.bg-white]="page !== currentPage"
+          [class.text-gray-700]="page !== currentPage"
+          [class.border-gray-300]="page !== currentPage"
+          class="relative inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-gray-50 transition-colors">
+          {{ page }}
+        </button>
+      }
+    </div>
+    <button 
+      (click)="onNext()" 
+      [disabled]="currentPage >= totalPages"
+      class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:z-20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+      Next
+    </button>
+  </div>
+</nav>
