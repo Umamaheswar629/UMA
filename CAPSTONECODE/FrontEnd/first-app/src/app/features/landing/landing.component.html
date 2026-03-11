@@ -1,0 +1,410 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50/30 to-blue-50/20 flex flex-col font-sans text-slate-900">
+
+  <!-- Navbar (Glassmorphism) -->
+  <nav class="bg-white/70 backdrop-blur-xl border-b border-white/40 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gradient-to-br from-indigo-600 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <span class="text-2xl font-black tracking-tight bg-gradient-to-r from-indigo-700 to-blue-600 bg-clip-text text-transparent">Sure</span>
+        </div>
+
+        <div class="hidden md:flex items-center space-x-8 text-sm font-bold">
+          <a href="#features" class="text-slate-500 hover:text-indigo-600 transition-colors">Platform</a>
+          <a href="#analytics" class="text-slate-500 hover:text-indigo-600 transition-colors">Growth</a>
+          <a href="#pricing" class="text-slate-500 hover:text-indigo-600 transition-colors">Plans</a>
+          <a href="#how-it-works" class="text-slate-500 hover:text-indigo-600 transition-colors">How It Works</a>
+        </div>
+
+        <div class="flex items-center gap-4 text-sm font-bold">
+          <a routerLink="/login" class="text-slate-600 hover:text-indigo-600 transition-colors hidden sm:block">Log in</a>
+          <a routerLink="/register" class="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white py-2.5 px-6 rounded-xl transition-all shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <!-- Animated Background Blobs -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-indigo-200/30 rounded-full blur-3xl landing-blob"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl landing-blob landing-blob-delay"></div>
+    <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-violet-200/20 rounded-full blur-3xl landing-blob landing-blob-delay-2"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-28 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <!-- Text Content with Staggered Animation -->
+        <div class="max-w-xl landing-animate-up">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-sm font-bold mb-8 shadow-sm">
+            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+            Commercial Insurance Platform
+          </div>
+          <h1 class="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.1] mb-6">
+            Protect your business with
+            <span class="bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 bg-clip-text text-transparent">absolute certainty.</span>
+          </h1>
+          <p class="text-xl text-slate-500 mb-10 leading-relaxed font-medium">
+            Sure is the all-in-one platform for modern enterprises to quote, bind, and manage commercial policies in minutes — not weeks.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a routerLink="/register" class="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white text-lg font-bold py-4 px-8 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all hover:-translate-y-1 hover:shadow-indigo-500/40 text-center inline-flex items-center justify-center gap-2">
+              Start your free quote
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+            </a>
+            <a href="#how-it-works" class="bg-white/70 backdrop-blur border border-slate-200 hover:border-indigo-200 hover:bg-indigo-50/50 text-slate-700 text-lg font-bold py-4 px-8 rounded-2xl transition-all hover:-translate-y-0.5 text-center shadow-sm">
+              See how it works
+            </a>
+          </div>
+
+          <!-- Trust badges -->
+          <div class="flex items-center gap-6 mt-10 pt-8 border-t border-slate-100">
+            <div class="flex -space-x-3">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-blue-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm">TN</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm">RS</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-violet-400 to-purple-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm">AK</div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold shadow-sm">+9</div>
+            </div>
+            <div>
+              <div class="flex text-amber-400 text-sm">★★★★★</div>
+              <p class="text-sm font-bold text-slate-500">Loved by <span class="text-slate-800">200+ agencies</span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Image Slideshow (Kept Same) -->
+        <div class="relative h-[550px] w-full rounded-3xl overflow-hidden shadow-2xl border border-white/50 bg-slate-100 landing-animate-up landing-animate-delay-200 group">
+          <ng-container *ngFor="let slide of slides; let i = index">
+            <img [src]="slide" alt="Commercial Business" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+              [ngClass]="activeSlideIndex() === i ? 'opacity-100' : 'opacity-0'" />
+          </ng-container>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-indigo-900/10 z-10"></div>
+
+          <!-- Floating Notification Card with subtle animation -->
+          <div class="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-xl p-5 rounded-2xl shadow-2xl border border-white/60 z-20 landing-float">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/30 flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="font-black text-slate-900">Policy Bound Successfully</p>
+                <p class="text-sm text-slate-500 font-medium truncate">Coverage active for <strong class="text-slate-700">TechNova Inc.</strong> — Liability up to ₹5,000,000</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-100 flex-shrink-0">Just now</span>
+            </div>
+          </div>
+
+          <!-- Slide Indicators -->
+          <div class="absolute bottom-6 right-6 z-20 flex gap-2">
+            <ng-container *ngFor="let slide of slides; let i = index">
+              <button (click)="activeSlideIndex.set(i)" class="w-2.5 h-2.5 rounded-full transition-all duration-300"
+                [ngClass]="activeSlideIndex() === i ? 'bg-white w-8 shadow-sm' : 'bg-white/50 hover:bg-white/80'"></button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scrolling Marquee Logos -->
+  <section class="py-10 border-y border-slate-100 bg-white/50 backdrop-blur-sm overflow-hidden">
+    <p class="text-center text-xs font-black text-slate-400 uppercase tracking-[0.25em] mb-6">Trusted by leading enterprises</p>
+    <div class="flex gap-16 items-center justify-center opacity-30 grayscale">
+      <svg class="h-7" viewBox="0 0 100 30" fill="currentColor"><path d="M10,20 h20 v10 h-20 z M40,10 h20 v20 h-20 z M70,0 h20 v30 h-20 z" /></svg>
+      <svg class="h-7" viewBox="0 0 100 30" fill="currentColor"><circle cx="20" cy="15" r="10" /><circle cx="50" cy="15" r="10" /><circle cx="80" cy="15" r="10" /></svg>
+      <svg class="h-7" viewBox="0 0 100 30" fill="currentColor"><path d="M10,15 L30,5 L50,15 L30,25 Z M60,15 L80,5 L100,15 L80,25 Z" /></svg>
+      <svg class="h-7 hidden md:block" viewBox="0 0 100 30" fill="currentColor"><path d="M10,10 h80 v10 h-80 z M30,0 h40 v30 h-40 z" /></svg>
+      <svg class="h-7 hidden lg:block" viewBox="0 0 100 30" fill="currentColor"><path d="M0,30 L50,0 L100,30 H0 Z" /></svg>
+    </div>
+  </section>
+
+  <!-- Platform Features -->
+  <section id="features" class="py-28 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-indigo-50/30 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="inline-block text-xs font-black text-indigo-600 uppercase tracking-[0.25em] mb-4 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Platform</span>
+        <h2 class="text-4xl font-black text-slate-900 tracking-tight mb-5">Everything an agency needs</h2>
+        <p class="text-xl text-slate-500 font-medium">Built to eliminate redundant paperwork and automate underwriting.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="group bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-2 transition-all duration-300 hover:border-indigo-100">
+          <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-blue-500/25 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">Policy Management</h3>
+          <p class="text-slate-500 leading-relaxed font-medium">Centralize docs, handle endorsements digitally, and fully automate renewal tracking.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="group bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-2 transition-all duration-300 hover:border-indigo-100">
+          <div class="w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-violet-500/25 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">Accelerated Claims</h3>
+          <p class="text-slate-500 leading-relaxed font-medium">Process claims up to 70% faster with visual evidence submissions and prioritized workflows.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="group bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-2 transition-all duration-300 hover:border-indigo-100">
+          <div class="w-14 h-14 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/25 group-hover:scale-110 transition-transform">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h3 class="text-xl font-black text-slate-900 mb-3">Enterprise Analytics</h3>
+          <p class="text-slate-500 leading-relaxed font-medium">Real-time reporting on agency performance, commission rates, and claim ratios.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analytics & Growth -->
+  <section id="analytics" class="py-28 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full">
+      <div class="absolute top-20 left-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-20 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="inline-block text-xs font-black text-indigo-300 uppercase tracking-[0.25em] mb-4 bg-indigo-500/10 px-4 py-2 rounded-full border border-indigo-500/20">Growth</span>
+          <h2 class="text-4xl font-black tracking-tight mb-6">Unprecedented Scale</h2>
+          <p class="text-lg text-slate-300 mb-10 leading-relaxed font-medium">From regional brokerages to national MGAs, Sure provides enterprise-grade infrastructure.</p>
+
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+              <p class="text-4xl font-black text-white mb-1 bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">₹5.2B</p>
+              <p class="text-sm font-bold text-slate-400">Premium Managed</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+              <p class="text-4xl font-black text-white mb-1 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">99.9%</p>
+              <p class="text-sm font-bold text-slate-400">Platform Uptime</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+              <p class="text-4xl font-black text-white mb-1 bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">12K+</p>
+              <p class="text-sm font-bold text-slate-400">Claims Resolved</p>
+            </div>
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+              <p class="text-4xl font-black text-white mb-1 bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">200+</p>
+              <p class="text-sm font-bold text-slate-400">Active Agencies</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-sm rounded-3xl border border-white/10 shadow-2xl overflow-hidden hover:border-white/20 transition-colors">
+          <img src="/assets/revenue_growth_chart.png" alt="Revenue Growth Dashboard" class="w-full h-auto object-cover opacity-90 hover:opacity-100 transition-opacity">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Insurance Plans -->
+  <section id="pricing" class="py-28 bg-gradient-to-b from-slate-50 to-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block text-xs font-black text-indigo-600 uppercase tracking-[0.25em] mb-4 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Plans</span>
+        <h2 class="text-4xl font-black text-slate-900 mb-4">General Liability Insurance Plans</h2>
+        <p class="text-xl text-slate-500 font-medium">Covers third-party bodily injury and property damage claims.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <!-- Basic -->
+        <div class="group bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 transition-all hover:-translate-y-1 flex flex-col">
+          <h4 class="text-lg font-black text-slate-900 mb-1">Basic</h4>
+          <div class="mb-6"><span class="text-4xl font-black text-slate-900">₹8,000</span><span class="text-slate-400 font-bold">/yr</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-3 pb-3 border-b border-slate-100"><span>Coverage</span><span class="font-black text-slate-900">₹5,00,000</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-6 pb-3 border-b border-slate-100"><span>Commission</span><span class="font-black text-slate-900">5%</span></div>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Features</p>
+          <ul class="space-y-2.5 text-sm text-slate-600 mb-6 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Third-party coverage</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Basic legal support</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Annual review</li>
+          </ul>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Exclusions</p>
+          <ul class="space-y-2.5 text-sm text-slate-400 flex-1 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Natural disasters</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Intentional damage</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Criminal acts</li>
+          </ul>
+        </div>
+
+        <!-- Standard (Highlighted) -->
+        <div class="group bg-gradient-to-br from-indigo-50 to-blue-50 rounded-3xl p-8 border-2 border-indigo-200 shadow-xl shadow-indigo-500/10 relative flex flex-col md:-translate-y-4 hover:-translate-y-6 transition-all">
+          <div class="absolute top-0 right-0 bg-gradient-to-r from-indigo-600 to-blue-600 text-white text-xs font-black px-4 py-1.5 rounded-bl-2xl rounded-tr-3xl uppercase tracking-wider shadow-lg">Popular</div>
+          <h4 class="text-lg font-black text-slate-900 mb-1">Standard</h4>
+          <div class="mb-6"><span class="text-4xl font-black text-slate-900">₹15,000</span><span class="text-slate-400 font-bold">/yr</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-3 pb-3 border-b border-indigo-100"><span>Coverage</span><span class="font-black text-slate-900">₹15,00,000</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-6 pb-3 border-b border-indigo-100"><span>Commission</span><span class="font-black text-slate-900">7%</span></div>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Features</p>
+          <ul class="space-y-2.5 text-sm text-slate-700 mb-6 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Basic features</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Extended coverage</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Priority claims</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>24/7 support</li>
+          </ul>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Exclusions</p>
+          <ul class="space-y-2.5 text-sm text-slate-400 flex-1 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Natural disasters</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Intentional damage</li>
+          </ul>
+        </div>
+
+        <!-- Premium -->
+        <div class="group bg-gradient-to-br from-amber-50/50 to-orange-50/30 rounded-3xl p-8 border border-amber-200/60 shadow-sm hover:shadow-xl hover:shadow-amber-200/40 transition-all hover:-translate-y-1 flex flex-col">
+          <h4 class="text-lg font-black text-slate-900 mb-1">Premium</h4>
+          <div class="mb-6"><span class="text-4xl font-black text-slate-900">₹25,000</span><span class="text-slate-400 font-bold">/yr</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-3 pb-3 border-b border-amber-100"><span>Coverage</span><span class="font-black text-slate-900">₹50,00,000</span></div>
+          <div class="flex justify-between text-sm text-slate-500 mb-6 pb-3 border-b border-amber-100"><span>Commission</span><span class="font-black text-slate-900">10%</span></div>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Features</p>
+          <ul class="space-y-2.5 text-sm text-slate-600 mb-6 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>All Standard features</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Comprehensive coverage</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Dedicated manager</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Global coverage</li>
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Zero deductible</li>
+          </ul>
+          <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-3">Exclusions</p>
+          <ul class="space-y-2.5 text-sm text-slate-400 flex-1 font-medium">
+            <li class="flex items-center gap-2"><svg class="w-4 h-4 text-rose-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>Intentional damage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="py-28 bg-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full">
+      <div class="absolute top-40 right-20 w-80 h-80 bg-indigo-100/30 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="inline-block text-xs font-black text-indigo-600 uppercase tracking-[0.25em] mb-4 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Process</span>
+        <h2 class="text-4xl font-black text-slate-900 tracking-tight mb-5">Simplified workflow</h2>
+        <p class="text-xl text-slate-500 font-medium">From account creation to bound policy in four simple steps.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+        <!-- Connector Line (hidden on mobile) -->
+        <div class="hidden md:block absolute top-10 left-[calc(12.5%+2rem)] right-[calc(12.5%+2rem)] h-0.5 bg-gradient-to-r from-indigo-200 via-blue-200 to-indigo-200"></div>
+
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-indigo-500/25 group-hover:scale-110 group-hover:rotate-3 transition-all relative z-10">1</div>
+          <h4 class="font-black text-slate-900 text-lg mb-2">Create Profile</h4>
+          <p class="text-slate-500 text-sm font-medium">Input your basic business metrics safely and securely.</p>
+        </div>
+        <div class="text-center group md:mt-12">
+          <div class="w-20 h-20 bg-gradient-to-br from-violet-600 to-purple-600 text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-violet-500/25 group-hover:scale-110 group-hover:-rotate-3 transition-all relative z-10">2</div>
+          <h4 class="font-black text-slate-900 text-lg mb-2">Build Quote</h4>
+          <p class="text-slate-500 text-sm font-medium">Select coverages tailored strictly for your industry.</p>
+        </div>
+        <div class="text-center group">
+          <div class="w-20 h-20 bg-gradient-to-br from-emerald-600 to-teal-600 text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-emerald-500/25 group-hover:scale-110 group-hover:rotate-3 transition-all relative z-10">3</div>
+          <h4 class="font-black text-slate-900 text-lg mb-2">Agent Review</h4>
+          <p class="text-slate-500 text-sm font-medium">A certified agent reviews and approves the structure.</p>
+        </div>
+        <div class="text-center group md:mt-12">
+          <div class="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 text-white rounded-2xl flex items-center justify-center text-2xl font-black mx-auto mb-6 shadow-xl shadow-amber-500/25 group-hover:scale-110 group-hover:-rotate-3 transition-all relative z-10">4</div>
+          <h4 class="font-black text-slate-900 text-lg mb-2">Bind & Issue</h4>
+          <p class="text-slate-500 text-sm font-medium">Pay online and instantly access digital certificates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-28 bg-gradient-to-b from-slate-50 to-indigo-50/30 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="inline-block text-xs font-black text-indigo-600 uppercase tracking-[0.25em] mb-4 bg-indigo-50 px-4 py-2 rounded-full border border-indigo-100">Testimonials</span>
+          <h2 class="text-4xl font-black text-slate-900 tracking-tight mb-6">Customer feedback</h2>
+          <div class="text-xl text-slate-600 leading-relaxed mb-8 italic font-medium">
+            "Switching to Sure reduced our agency overhead dramatically, and claims are settled twice as fast now. Highly recommended."
+          </div>
+          <div class="flex items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="CEO Avatar" class="w-14 h-14 rounded-2xl object-cover shadow-lg border-2 border-white">
+            <div>
+              <p class="font-black text-slate-900">David M.</p>
+              <p class="text-sm font-bold text-slate-500">Managing Director, Risk Solutions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-6">
+          <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+            <p class="text-slate-700 mb-4 font-medium italic">"The UI is spotless. We onboarded 50 agents in a week without any training."</p>
+            <p class="text-sm font-black text-slate-900">— Sarah J., Operations Lead</p>
+          </div>
+          <div class="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-lg transition-shadow md:ml-10">
+            <div class="flex text-amber-400 text-sm mb-3">★★★★★</div>
+            <p class="text-indigo-900 mb-4 font-medium italic">"Submitting a digital claim took me exactly 4 minutes from my phone. Absolutely incredible."</p>
+            <p class="text-sm font-black text-indigo-800">— Mark T., Small Business Owner</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 text-center px-4 relative overflow-hidden">
+    <div class="absolute inset-0">
+      <div class="absolute top-10 left-20 w-64 h-64 bg-white/5 rounded-full blur-2xl"></div>
+      <div class="absolute bottom-10 right-20 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+    </div>
+    <div class="max-w-3xl mx-auto relative z-10">
+      <h2 class="text-4xl font-black text-white tracking-tight mb-6">Ready to upgrade your workflow?</h2>
+      <p class="text-indigo-100 text-lg mb-10 font-medium">Stop wasting time on paperwork. Get a quote or register your agency right now.</p>
+      <a routerLink="/register" class="inline-flex items-center gap-2 bg-white text-indigo-600 hover:bg-indigo-50 text-lg font-black py-4 px-10 rounded-2xl shadow-xl shadow-black/10 transition-all hover:-translate-y-1 hover:shadow-2xl">
+        Get Started Now
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 pt-16 pb-8 text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+        <div class="col-span-2 md:col-span-1">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="w-8 h-8 bg-gradient-to-br from-indigo-500 to-blue-600 rounded-lg flex items-center justify-center shadow-md">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <span class="text-xl font-black tracking-tight text-white">Sure</span>
+          </div>
+          <p class="text-sm leading-relaxed mb-6 font-medium">Commercial insurance distribution, management, and claims processing.</p>
+        </div>
+        <div>
+          <h4 class="text-white font-black mb-4 text-sm">Product</h4>
+          <ul class="space-y-2 text-sm font-medium">
+            <li><a href="#features" class="hover:text-indigo-400 transition-colors">Features</a></li>
+            <li><a href="#pricing" class="hover:text-indigo-400 transition-colors">Pricing</a></li>
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">Security</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-black mb-4 text-sm">Company</h4>
+          <ul class="space-y-2 text-sm font-medium">
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">About</a></li>
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-black mb-4 text-sm">Legal</h4>
+          <ul class="space-y-2 text-sm font-medium">
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-indigo-400 transition-colors">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 border-t border-slate-800 text-sm flex flex-col md:flex-row justify-between items-center gap-4 font-medium">
+        <p>&copy; 2026 Sure Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>

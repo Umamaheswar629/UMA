@@ -1,0 +1,293 @@
+<!-- ══════════════════════════════════════════════════════════════════
+     CIPMS Admin Dashboard – Premium UI with Chart.js
+     ══════════════════════════════════════════════════════════════════ -->
+
+<!-- Loading State -->
+@if (loading()) {
+  <div class="flex justify-center items-center h-96">
+    <div class="relative">
+      <div class="w-16 h-16 rounded-full border-4 border-indigo-100 border-t-indigo-600 animate-spin"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-8 h-8 rounded-full border-4 border-violet-100 border-b-violet-500 animate-spin" style="animation-direction: reverse; animation-duration: 0.6s;"></div>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="space-y-8 admin-dashboard">
+
+    <!-- ── Welcome Banner ───────────────────────────────────────── -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-violet-600 p-8 text-white shadow-xl dashboard-card-entrance">
+      <!-- decorative shapes -->
+      <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/10 blur-2xl"></div>
+      <div class="absolute bottom-0 left-0 w-60 h-20 bg-white/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-4 right-8 w-24 h-24 rounded-full border border-white/20 dashboard-float"></div>
+
+      <div class="relative z-10">
+        <h1 class="text-3xl font-bold tracking-tight">Welcome back, Admin 👋</h1>
+        <p class="mt-2 text-blue-100 text-lg max-w-xl">Here's an overview of your Commercial Insurance Policy Management System.</p>
+      </div>
+
+      <!-- wave decoration -->
+      <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 60" preserveAspectRatio="none">
+        <path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,15 1440,30 L1440,60 L0,60 Z" fill="rgba(255,255,255,0.08)"/>
+      </svg>
+    </div>
+
+    <!-- ── Stat Cards Row ───────────────────────────────────────── -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
+
+      <!-- Total Users -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.1s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-blue-500 to-blue-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Total Users</span>
+          <span class="stat-value">{{ stats()?.totalUsers || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-blue-500 to-blue-600"></div>
+      </div>
+
+      <!-- Active Policies -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.15s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-emerald-500 to-emerald-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Active Policies</span>
+          <span class="stat-value">{{ stats()?.activePolicies || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-emerald-500 to-emerald-600"></div>
+      </div>
+
+      <!-- Open Claims -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.2s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-rose-500 to-rose-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Open Claims</span>
+          <span class="stat-value">{{ stats()?.openClaims || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-rose-500 to-rose-600"></div>
+      </div>
+
+      <!-- Monthly Revenue -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.25s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-violet-500 to-violet-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Monthly Revenue</span>
+          <span class="stat-value">₹{{ stats()?.monthlyRevenue || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-violet-500 to-violet-600"></div>
+      </div>
+
+      <!-- Total Agents -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.3s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-amber-500 to-amber-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">Total Agents</span>
+          <span class="stat-value">{{ stats()?.totalAgents || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-amber-500 to-amber-600"></div>
+      </div>
+
+      <!-- New Users This Month -->
+      <div class="dashboard-stat-card dashboard-card-entrance" style="animation-delay: 0.35s">
+        <div class="stat-icon-wrapper bg-gradient-to-br from-indigo-500 to-indigo-700">
+          <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z"/>
+          </svg>
+        </div>
+        <div class="stat-content">
+          <span class="stat-label">New Users (Month)</span>
+          <span class="stat-value">{{ stats()?.newUsersThisMonth || 0 }}</span>
+        </div>
+        <div class="stat-accent bg-gradient-to-r from-indigo-500 to-indigo-600"></div>
+      </div>
+    </div>
+
+    <!-- ── Charts Row 1: Revenue Line + Policies Doughnut ──────── -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+      <!-- Monthly Revenue Chart (spans 3 cols) -->
+      <div class="lg:col-span-3 dashboard-glass-card dashboard-card-entrance" style="animation-delay: 0.4s">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Monthly Revenue Trend</h3>
+            <p class="text-sm text-gray-500 mt-0.5">Last 12 months performance</p>
+          </div>
+          <div class="flex items-center gap-2 text-xs text-gray-500">
+            <span class="inline-block w-3 h-3 rounded-full bg-indigo-500"></span> Revenue
+            <span class="inline-block w-3 h-3 rounded-full bg-violet-400 ml-2"></span> Policies
+          </div>
+        </div>
+        <div class="relative h-72">
+          <canvas #revenueChart></canvas>
+        </div>
+      </div>
+
+      <!-- Policies by Type Doughnut (spans 2 cols) -->
+      <div class="lg:col-span-2 dashboard-glass-card dashboard-card-entrance" style="animation-delay: 0.45s">
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-800">Policies by Type</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Distribution of active policies</p>
+        </div>
+        <div class="relative h-64 flex items-center justify-center">
+          <canvas #policiesChart></canvas>
+        </div>
+        @if (policiesByType().length > 0) {
+          <div class="mt-4 grid grid-cols-2 gap-2">
+            @for (p of policiesByType(); track p.insuranceTypeName; let i = $index) {
+              <div class="flex items-center gap-2 text-sm">
+                <span class="w-3 h-3 rounded-full flex-shrink-0" [style.background-color]="chartColors[i % chartColors.length]"></span>
+                <span class="text-gray-600 truncate">{{ p.insuranceTypeName }}</span>
+                <span class="text-gray-400 ml-auto">{{ p.count }}</span>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ── Charts Row 2: Claims Bar + Agent Bar ────────────────── -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Claims Breakdown -->
+      <div class="dashboard-glass-card dashboard-card-entrance" style="animation-delay: 0.5s">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Claims Breakdown</h3>
+            <p class="text-sm text-gray-500 mt-0.5">Status distribution of all claims</p>
+          </div>
+          @if (claimsRatio()) {
+            <div class="flex items-center gap-2">
+              <span class="text-sm text-gray-500">Approval Rate</span>
+              <span class="text-xl font-bold bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">
+                {{ claimsRatio()!.approvalRate | number:'1.0-1' }}%
+              </span>
+            </div>
+          }
+        </div>
+        <div class="relative h-64">
+          <canvas #claimsChart></canvas>
+        </div>
+      </div>
+
+      <!-- Agent Performance -->
+      <div class="dashboard-glass-card dashboard-card-entrance" style="animation-delay: 0.55s">
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-gray-800">Top Agent Performance</h3>
+          <p class="text-sm text-gray-500 mt-0.5">Policies created & commission earned</p>
+        </div>
+        <div class="relative h-64">
+          <canvas #agentChart></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Claims Summary Cards ────────────────────────────────── -->
+    @if (claimsRatio()) {
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 dashboard-card-entrance" style="animation-delay: 0.6s">
+        <div class="claims-mini-card border-l-4 border-amber-400 bg-amber-50/80">
+          <span class="text-xs font-medium text-amber-600 uppercase tracking-wide">Submitted</span>
+          <span class="text-2xl font-bold text-amber-700 mt-1">{{ claimsRatio()!.submitted }}</span>
+        </div>
+        <div class="claims-mini-card border-l-4 border-blue-400 bg-blue-50/80">
+          <span class="text-xs font-medium text-blue-600 uppercase tracking-wide">Under Review</span>
+          <span class="text-2xl font-bold text-blue-700 mt-1">{{ claimsRatio()!.underReview }}</span>
+        </div>
+        <div class="claims-mini-card border-l-4 border-emerald-400 bg-emerald-50/80">
+          <span class="text-xs font-medium text-emerald-600 uppercase tracking-wide">Approved</span>
+          <span class="text-2xl font-bold text-emerald-700 mt-1">{{ claimsRatio()!.approved }}</span>
+        </div>
+        <div class="claims-mini-card border-l-4 border-red-400 bg-red-50/80">
+          <span class="text-xs font-medium text-red-600 uppercase tracking-wide">Rejected</span>
+          <span class="text-2xl font-bold text-red-700 mt-1">{{ claimsRatio()!.rejected }}</span>
+        </div>
+        <div class="claims-mini-card border-l-4 border-teal-400 bg-teal-50/80">
+          <span class="text-xs font-medium text-teal-600 uppercase tracking-wide">Settled</span>
+          <span class="text-2xl font-bold text-teal-700 mt-1">{{ claimsRatio()!.settled }}</span>
+        </div>
+      </div>
+    }
+
+    <!-- ── Agent Performance Table ─────────────────────────────── -->
+    @if (agentPerformance().length > 0) {
+      <div class="dashboard-glass-card dashboard-card-entrance" style="animation-delay: 0.65s">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-800">Agent Performance Details</h3>
+            <p class="text-sm text-gray-500 mt-0.5">Comprehensive agent metrics</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">
+            {{ agentPerformance().length }} Agent{{ agentPerformance().length > 1 ? 's' : '' }}
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="border-b border-gray-200/80">
+                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">#</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Agent Name</th>
+                <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Policies</th>
+                <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Commission (₹)</th>
+                <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Avg Premium (₹)</th>
+                <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Performance</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              @for (agent of agentPerformance(); track agent.agentId; let i = $index) {
+                <tr class="hover:bg-indigo-50/40 transition-colors duration-200">
+                  <td class="px-4 py-3.5">
+                    <span class="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold"
+                      [class]="i === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600 text-white' :
+                               i === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-white' :
+                               i === 2 ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white' :
+                               'bg-gray-100 text-gray-500'">
+                      {{ i + 1 }}
+                    </span>
+                  </td>
+                  <td class="px-4 py-3.5">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-white text-xs font-bold">
+                        {{ agent.agentName.charAt(0) }}
+                      </div>
+                      <span class="font-medium text-gray-800">{{ agent.agentName }}</span>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3.5 text-right font-semibold text-gray-700">{{ agent.totalPolicies }}</td>
+                  <td class="px-4 py-3.5 text-right font-semibold text-emerald-600">₹{{ agent.totalCommission | number:'1.0-0' }}</td>
+                  <td class="px-4 py-3.5 text-right text-gray-600">₹{{ agent.averagePremium | number:'1.0-0' }}</td>
+                  <td class="px-4 py-3.5">
+                    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden max-w-[120px]">
+                      <div class="h-2 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-700"
+                        [style.width.%]="getAgentPerformancePercent(agent)">
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    }
+
+  </div>
+}

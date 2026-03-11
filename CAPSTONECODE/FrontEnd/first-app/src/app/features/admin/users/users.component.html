@@ -1,0 +1,207 @@
+<div class="space-y-6 animate-fade-in pb-10">
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/80 backdrop-blur-md p-6 rounded-2xl shadow-sm border border-slate-100">
+    <div class="flex flex-1 gap-4 w-full sm:w-auto items-center">
+      <div class="relative w-full sm:w-80">
+        <input type="text" placeholder="Search users by name or email..." [ngModel]="searchTerm()"
+          (ngModelChange)="onSearchChange($event)"
+          class="w-full pl-11 pr-4 py-3 border border-slate-200 bg-slate-50 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 font-medium text-sm transition-all shadow-sm">
+        <svg class="h-5 w-5 text-slate-400 absolute left-4 top-3.5" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <select [ngModel]="roleFilter()" (ngModelChange)="roleFilter.set($event)"
+        class="block w-full sm:w-48 pl-4 pr-10 py-3 text-sm font-bold text-slate-700 bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 rounded-xl shadow-sm cursor-pointer hover:border-slate-300 transition-colors">
+        <option value="">All Roles</option>
+        <option value="Admin">Admin</option>
+        <option value="Customer">Customer</option>
+        <option value="Agent">Agent</option>
+        <option value="ClaimsOfficer">Claims Officer</option>
+      </select>
+    </div>
+
+    <button (click)="showCreateModal.set(true)"
+      class="inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-xl shadow-lg shadow-indigo-500/30 text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all hover:-translate-y-0.5 whitespace-nowrap">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+      Create Staff Account
+    </button>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden animate-slide-up delay-100">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-slate-100">
+        <thead class="bg-slate-50">
+          <tr>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider">User Details</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider">Role</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider">Status</th>
+            <th scope="col" class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider">Created At</th>
+            <th scope="col" class="px-6 py-4 text-right text-xs font-black text-slate-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-slate-50">
+          @if (loading()) {
+          <tr>
+            <td colspan="5" class="px-6 py-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full skeleton-row"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="skeleton-row w-3/4"></div>
+                            <div class="skeleton-row w-1/2" style="animation-delay:0.2s"></div>
+                        </div>
+                        <div class="skeleton-row w-20"></div>
+                        <div class="skeleton-row w-16"></div>
+                        <div class="skeleton-row w-24"></div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full skeleton-row" style="animation-delay:0.3s"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="skeleton-row w-2/3" style="animation-delay:0.4s"></div>
+                            <div class="skeleton-row w-1/3" style="animation-delay:0.5s"></div>
+                        </div>
+                        <div class="skeleton-row w-20" style="animation-delay:0.3s"></div>
+                        <div class="skeleton-row w-16" style="animation-delay:0.4s"></div>
+                        <div class="skeleton-row w-24" style="animation-delay:0.5s"></div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full skeleton-row" style="animation-delay:0.6s"></div>
+                        <div class="flex-1 space-y-2">
+                            <div class="skeleton-row w-4/5" style="animation-delay:0.7s"></div>
+                            <div class="skeleton-row w-2/5" style="animation-delay:0.8s"></div>
+                        </div>
+                        <div class="skeleton-row w-20" style="animation-delay:0.6s"></div>
+                        <div class="skeleton-row w-16" style="animation-delay:0.7s"></div>
+                        <div class="skeleton-row w-24" style="animation-delay:0.8s"></div>
+                    </div>
+                </div>
+                <div class="flex justify-center items-center gap-2 mt-6">
+                    <div class="loader-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="text-xs font-bold text-slate-400 ml-2">Loading users</span>
+                </div>
+            </td>
+          </tr>
+          } @else if (users().length === 0) {
+          <tr>
+            <td colspan="5" class="px-6 py-12 text-center text-sm font-medium text-slate-500 italic">No users found matching your criteria.</td>
+          </tr>
+          } @else {
+          @for (user of users(); track user.id) {
+          <tr class="hover:bg-indigo-50/50 transition-colors group">
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="flex items-center">
+                    <div class="h-10 w-10 shrink-0 bg-indigo-100 text-indigo-700 rounded-full flex items-center justify-center font-black text-sm shadow-inner group-hover:bg-indigo-200 transition-colors">
+                        {{ user.fullName.charAt(0).toUpperCase() }}
+                    </div>
+                    <div class="ml-4">
+                        <div class="text-sm font-black text-slate-900">{{ user.fullName }}</div>
+                        <div class="text-xs font-medium text-slate-500">{{ user.email }}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                  <span class="px-3 py-1 bg-slate-100 text-slate-700 font-bold text-xs rounded-lg inline-flex">
+                    @if (user.role === 'ClaimsOfficer') { Claims Officer }
+                    @else { {{ user.role }} }
+                  </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <app-badge [status]="user.isActive ? 'Active' : 'Cancelled'"></app-badge>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-400">{{ user.createdAt | date:'mediumDate' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              @if (user.role !== 'Admin') {
+              <button (click)="toggleStatus(user.id)"
+                class="px-4 py-2 rounded-xl text-white text-xs font-bold transition-all shadow-sm hover:-translate-y-0.5"
+                [ngClass]="user.isActive ? 'bg-rose-500 hover:bg-rose-600 shadow-rose-500/30' : 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-500/30'">
+                {{ user.isActive ? 'Deactivate' : 'Activate' }}
+              </button>
+              }
+            </td>
+          </tr>
+          }
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="p-3 border-t border-slate-100 bg-slate-50 flex justify-center">
+        @if (totalPages() > 1) {
+        <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()" (pageChange)="currentPage.set($event)"></app-pagination>
+        }
+    </div>
+  </div>
+
+  <!-- Create Staff Modal -->
+  @if (showCreateModal()) {
+  <div class="relative z-50">
+    <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity animate-fade-in"></div>
+    <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md animate-slide-up border border-slate-100">
+          <div class="bg-gradient-to-r from-slate-50 to-white px-6 pb-4 pt-6 sm:p-8 sm:pb-6 border-b border-slate-100">
+            <h3 class="text-xl font-black tracking-tight text-slate-900 mb-6 flex items-center gap-2">
+                <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                Create Staff Account
+            </h3>
+
+            @if (createError()) {
+            <div class="mb-5 text-sm font-bold text-rose-600 bg-rose-50 p-3 rounded-xl border border-rose-200 shadow-sm flex items-center gap-2">
+                <svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              {{ createError() }}
+            </div>
+            }
+
+            <div class="space-y-5">
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Full Name</label>
+                <input type="text" [ngModel]="fullName()" (ngModelChange)="fullName.set($event)"
+                  class="mt-1 block w-full rounded-xl border border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm p-3 bg-slate-50 focus:bg-white transition-colors"
+                  placeholder="e.g. Jane Doe">
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Email Address</label>
+                <input type="email" [ngModel]="email()" (ngModelChange)="email.set($event)"
+                  class="mt-1 block w-full rounded-xl border border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm p-3 bg-slate-50 focus:bg-white transition-colors"
+                  placeholder="jane@company.com">
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Temporary Password</label>
+                <input type="password" [ngModel]="password()" (ngModelChange)="password.set($event)"
+                  class="mt-1 block w-full rounded-xl border border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm p-3 bg-slate-50 focus:bg-white transition-colors"
+                  placeholder="••••••••">
+              </div>
+              <div>
+                <label class="block text-sm font-bold text-slate-700 mb-1">Initial Role</label>
+                <select [ngModel]="role()" (ngModelChange)="role.set(+$event)"
+                  class="mt-1 block w-full rounded-xl border border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 sm:text-sm p-3 bg-slate-50 focus:bg-white transition-colors cursor-pointer">
+                  <option [value]="2">Agent</option>
+                  <option [value]="4">Claims Officer</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 px-6 py-4 sm:flex sm:flex-row-reverse border-t border-slate-100 gap-3">
+            <button type="button" (click)="createStaff()"
+              [disabled]="createLoading() || !fullName() || !email() || !password()"
+              class="inline-flex w-full justify-center items-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-700 sm:w-auto disabled:opacity-50 disabled:transform-none disabled:shadow-none hover:-translate-y-0.5 transition-all">
+              <span *ngIf="createLoading()" class="mr-2">
+                <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              </span>
+              Create Staff User
+            </button>
+            <button type="button" (click)="closeModal()"
+              class="mt-3 sm:mt-0 inline-flex w-full justify-center rounded-xl bg-white px-6 py-3 text-sm font-bold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 sm:w-auto transition-colors">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

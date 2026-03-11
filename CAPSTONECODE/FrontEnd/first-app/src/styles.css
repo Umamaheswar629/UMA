@@ -1,0 +1,203 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+@layer utilities {
+    .animate-fade-in {
+        animation: fadeIn 0.4s ease-out forwards;
+    }
+    
+    .animate-slide-up {
+        animation: slideUp 0.5s ease-out forwards;
+        opacity: 0;
+    }
+
+    .animate-slide-in-right {
+        animation: slideInRight 0.4s ease-out forwards;
+    }
+
+    /* Staggered animation delays for lists */
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ── Premium Loading Animations ────────────────────────────────── */
+
+/* Bouncing dots loader */
+@keyframes bounceDot {
+    0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+.loader-dots {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.loader-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+    animation: bounceDot 1.4s infinite ease-in-out both;
+}
+.loader-dots span:nth-child(1) { animation-delay: -0.32s; }
+.loader-dots span:nth-child(2) { animation-delay: -0.16s; }
+.loader-dots span:nth-child(3) { animation-delay: 0s; }
+
+/* Pulse ring loader */
+@keyframes pulseRing {
+    0% { transform: scale(0.8); opacity: 1; }
+    50% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(0.8); opacity: 1; }
+}
+
+@keyframes orbitSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-orbit {
+    position: relative;
+    width: 48px;
+    height: 48px;
+}
+.loader-orbit::before,
+.loader-orbit::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+}
+.loader-orbit::before {
+    inset: 0;
+    border: 3px solid #e2e8f0;
+    border-top-color: #6366f1;
+    border-right-color: #3b82f6;
+    animation: orbitSpin 0.8s linear infinite;
+}
+.loader-orbit::after {
+    inset: 8px;
+    border: 3px solid #e2e8f0;
+    border-bottom-color: #818cf8;
+    border-left-color: #60a5fa;
+    animation: orbitSpin 1.2s linear infinite reverse;
+}
+
+/* Skeleton shimmer for table rows */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton-row {
+    height: 16px;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Small inline spinner for buttons */
+.loader-btn {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: orbitSpin 0.6s linear infinite;
+    display: inline-block;
+}
+
+/* ── Landing Page Animations ──────────────────────────────────── */
+
+@keyframes blobFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -20px) scale(1.05); }
+    66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+@keyframes landingUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.landing-blob { animation: blobFloat 8s ease-in-out infinite; }
+.landing-blob-delay { animation-delay: 2s; }
+.landing-blob-delay-2 { animation-delay: 4s; }
+
+.landing-animate-up {
+    animation: landingUp 0.8s ease-out forwards;
+}
+.landing-animate-delay-200 {
+    animation: landingUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+}
+
+.landing-float {
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* ── Admin Dashboard Utilities ────────────────────────────────── */
+
+.admin-dashboard {
+    background: linear-gradient(135deg, rgba(238, 242, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%, rgba(237, 233, 254, 0.3) 100%);
+    border-radius: 1rem;
+    min-height: 100%;
+}
+
+/* Gradient text utility */
+.dashboard-gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Gradient border effect */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.dashboard-gradient-border {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #3b82f6, #6366f1);
+    background-size: 300% 300%;
+    animation: gradientShift 6s ease infinite;
+}
+

@@ -1,0 +1,295 @@
+<div class="h-[calc(100vh-8rem)] flex flex-col space-y-6 animate-fade-in">
+    <div
+        class="flex justify-between items-center bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-slate-100 flex-shrink-0">
+        <h2 class="text-2xl font-bold tracking-tight text-slate-900">My Policies</h2>
+        <div class="text-sm font-medium text-slate-500 bg-slate-100 px-4 py-1.5 rounded-full">Total: <span class="font-extrabold text-slate-900">{{ totalCount() }}</span></div>
+    </div>
+
+    @if (successMessage()) {
+    <app-alert type="success" [message]="successMessage()" [visible]="true"
+        (dismissed)="successMessage.set('')"></app-alert>
+    }
+    @if (errorMessage()) {
+    <app-alert type="error" [message]="errorMessage()" [visible]="true" (dismissed)="errorMessage.set('')"></app-alert>
+    }
+
+    <div class="flex-1 flex gap-8 min-h-0 animate-slide-up">
+        <!-- Left Panel: Policies List -->
+        <div class="w-1/3 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-hidden">
+            <div class="flex-1 overflow-y-auto p-3 space-y-3">
+                @if (loading()) {
+                <div class="p-4 space-y-3">
+                    <div class="p-4 rounded-2xl border border-slate-100 space-y-3">
+                        <div class="flex justify-between"><div class="skeleton-row w-20"></div><div class="skeleton-row w-14"></div></div>
+                        <div class="skeleton-row w-3/4" style="animation-delay:0.1s"></div>
+                        <div class="flex justify-between"><div class="skeleton-row w-24" style="animation-delay:0.2s"></div><div class="skeleton-row w-16" style="animation-delay:0.2s"></div></div>
+                    </div>
+                    <div class="p-4 rounded-2xl border border-slate-100 space-y-3">
+                        <div class="flex justify-between"><div class="skeleton-row w-20" style="animation-delay:0.3s"></div><div class="skeleton-row w-14" style="animation-delay:0.3s"></div></div>
+                        <div class="skeleton-row w-2/3" style="animation-delay:0.4s"></div>
+                        <div class="flex justify-between"><div class="skeleton-row w-24" style="animation-delay:0.5s"></div><div class="skeleton-row w-16" style="animation-delay:0.5s"></div></div>
+                    </div>
+                    <div class="flex justify-center items-center gap-2 mt-4">
+                        <div class="loader-dots"><span></span><span></span><span></span></div>
+                    </div>
+                </div>
+                }
+                @if (!loading() && policies().length === 0) {
+                <div class="text-center p-6 text-sm font-medium text-slate-500 italic">No policies found. Generate a quote to start!
+                </div>
+                }
+
+                @for (p of policies(); track p.policyId) {
+                <div (click)="loadPolicyDetail(p.policyId)"
+                    [class.bg-indigo-50]="selectedPolicy()?.policyId === p.policyId"
+                    [class.border-indigo-300]="selectedPolicy()?.policyId === p.policyId"
+                    [class.shadow-md]="selectedPolicy()?.policyId === p.policyId"
+                    class="p-5 rounded-2xl border border-slate-100 hover:border-indigo-300 hover:bg-slate-50 hover:shadow-md cursor-pointer transition-all block group">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded-md uppercase tracking-wider">{{ p.insuranceTypeName }}</span>
+                        <app-badge [status]="p.status"></app-badge>
+                    </div>
+                    <h4 class="text-base font-extrabold text-slate-900 truncate mb-2 group-hover:text-indigo-700 transition-colors">{{ p.policyNumber }}</h4>
+                    <div class="flex justify-between text-xs text-slate-500 font-medium">
+                        <span>Ends: {{ p.endDate | date:'mediumDate' }}</span>
+                        <span class="font-bold text-slate-900">₹{{ p.premiumAmount | number:'1.0-0' }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+
+            <div class="p-3 border-t border-slate-100 bg-slate-50 flex-shrink-0 flex justify-center rounded-b-2xl">
+                @if (totalPages() > 1) {
+                <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()"
+                    (pageChange)="onPageChange($event)">
+                </app-pagination>
+                }
+            </div>
+        </div>
+
+        <!-- Right Panel: Policy Details -->
+        <div class="w-2/3 bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col overflow-y-auto relative animate-slide-up delay-100">
+            @if (detailLoading()) {
+            <div class="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col justify-center items-center rounded-2xl gap-4">
+                <div class="loader-orbit"></div>
+                <div class="loader-dots"><span></span><span></span><span></span></div>
+            </div>
+            }
+
+            @if (!selectedPolicy() && !detailLoading()) {
+            <div class="flex-1 flex flex-col items-center justify-center text-slate-400 p-8 space-y-4">
+                <svg class="w-16 h-16 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <p class="font-medium text-lg">Select a policy to view full details.</p>
+            </div>
+            }
+
+            @if (selectedPolicy() && !detailLoading()) {
+            <!-- Policy Header -->
+            <div
+                class="p-8 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex justify-between items-center flex-shrink-0 relative overflow-hidden rounded-t-2xl">
+                <div class="absolute right-0 top-0 opacity-5 pointer-events-none p-4 transform translate-x-4 -translate-y-4">
+                    <svg class="w-48 h-48" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M11 2.87c.6-.26 1.4-.26 2 0l7 3.03c.6.26 1 .84 1 1.5A13.43 13.43 0 0112 21.92 13.43 13.43 0 013 7.4c0-.66.4-1.24 1-1.5l7-3.03z" />
+                    </svg>
+                </div>
+                <div class="relative z-10 w-full flex justify-between items-center">
+                    <div>
+                        <div class="flex items-center gap-4 mb-2">
+                            <h3 class="text-3xl font-black tracking-tight text-slate-900">{{ selectedPolicy()!.policyNumber }}</h3>
+                            <app-badge [status]="selectedPolicy()!.status"></app-badge>
+                        </div>
+                        <p class="text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-md inline-block">{{ selectedPolicy()!.insuranceTypeName }} - {{
+                            selectedPolicy()!.tierName }}</p>
+                    </div>
+                    <div class="flex gap-3">
+                        @if (selectedPolicy()!.canRenew) {
+                        <button (click)="showRenewModal.set(true)"
+                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-md shadow-indigo-500/20 text-sm font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all">Renew
+                            Policy</button>
+                        }
+                        @if (selectedPolicy()!.canCancel) {
+                        <button (click)="showCancelModal.set(true)"
+                            class="inline-flex items-center px-4 py-2 border border-rose-200 shadow-sm text-sm font-bold rounded-xl text-rose-700 bg-rose-50 hover:bg-rose-100 hover:border-rose-300 transition-all">Cancel
+                            Policy</button>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8 overflow-y-auto space-y-10 flex-1">
+                <!-- Key Stats Row -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+                    <div class="border border-slate-100 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Premium</div>
+                        <div class="text-xl font-black text-emerald-600">₹{{ selectedPolicy()!.premiumAmount |
+                            number:'1.0-0' }}</div>
+                    </div>
+                    <div class="border border-slate-100 rounded-2xl p-5 bg-white shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Coverage Limit</div>
+                        <div class="text-xl font-black text-slate-900">₹{{ selectedPolicy()!.coverageLimit |
+                            number:'1.0-0' }}</div>
+                    </div>
+                    <div class="border border-slate-100 rounded-2xl p-5 bg-indigo-50/50 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">Start Date</div>
+                        <div class="text-base font-extrabold text-indigo-900">{{ selectedPolicy()!.startDate | date:'mediumDate'
+                            }}</div>
+                    </div>
+                    <div class="border border-slate-100 rounded-2xl p-5 bg-rose-50/50 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-2">End Date</div>
+                        <div class="text-base font-extrabold text-rose-700">{{ selectedPolicy()!.endDate | date:'mediumDate' }}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div>
+                    <h4 class="text-sm font-black uppercase tracking-widest text-slate-800 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Included Features
+                    </h4>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                        @for (f of selectedPolicy()!.features; track f) {
+                        <li class="flex gap-3 text-sm font-medium text-slate-700 items-start">
+                            <div class="bg-emerald-100 rounded-full p-1 mt-0.5 shadow-sm">
+                                <svg class="h-3 w-3 text-emerald-600 flex-shrink-0" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor" stroke-width="3">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="leading-relaxed">{{ f }}</span>
+                        </li>
+                        }
+                    </ul>
+                </div>
+
+                <!-- Invoices -->
+                <div>
+                    <h4 class="text-sm font-black uppercase tracking-widest text-slate-800 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                        Billing Details
+                    </h4>
+                    <div class="overflow-hidden border border-slate-100 rounded-2xl shadow-sm">
+                        <table class="min-w-full divide-y divide-slate-100">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="py-3 pl-6 pr-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Invoice #
+                                    </th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Amount</th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Due Date</th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 bg-white">
+                                @if (selectedPolicy()!.invoices.length === 0) {
+                                <tr>
+                                    <td colspan="4" class="py-6 text-center text-sm font-medium text-slate-500 italic">No invoices generated
+                                        yet.</td>
+                                </tr>
+                                }
+                                @for (inv of selectedPolicy()!.invoices; track inv.invoiceNumber) {
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="py-3 pl-6 pr-3 text-sm font-bold text-slate-900">{{ inv.invoiceNumber }}
+                                    </td>
+                                    <td class="py-3 px-3 text-sm font-extrabold text-slate-700">₹{{ inv.amount | number:'1.0-0' }}</td>
+                                    <td class="py-3 px-3 text-sm font-medium text-slate-600">{{ inv.dueDate | date:'mediumDate' }}</td>
+                                    <td class="py-3 px-3 text-sm"><app-badge [status]="inv.status"></app-badge></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Claims -->
+                <div>
+                    <h4 class="text-sm font-black uppercase tracking-widest text-slate-800 mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Recent Claims
+                    </h4>
+                    <div class="overflow-hidden border border-slate-100 rounded-2xl shadow-sm">
+                        <table class="min-w-full divide-y divide-slate-100">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="py-3 pl-6 pr-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Claim #</th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Filed On</th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Settlement</th>
+                                    <th class="py-3 px-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-50 bg-white">
+                                @if (selectedPolicy()!.claims.length === 0) {
+                                <tr>
+                                    <td colspan="4" class="py-6 text-center text-sm font-medium text-slate-500 italic">No claims filed.</td>
+                                </tr>
+                                }
+                                @for (claim of selectedPolicy()!.claims; track claim.claimNumber) {
+                                <tr class="hover:bg-slate-50 transition-colors">
+                                    <td class="py-3 pl-6 pr-3 text-sm font-bold text-slate-900">{{ claim.claimNumber }}
+                                    </td>
+                                    <td class="py-3 px-3 text-sm font-medium text-slate-600">{{ claim.filedAt | date:'mediumDate' }}</td>
+                                    <td class="py-3 px-3 text-sm font-extrabold text-emerald-600">{{ claim.settlementAmount ?
+                                        '₹'+ (claim.settlementAmount | number:'1.0-0') : '-' }}</td>
+                                    <td class="py-3 px-3 text-sm"><app-badge [status]="claim.status"></app-badge></td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- Cancel Modal -->
+    @if (showCancelModal()) {
+    <div class="relative z-50">
+        <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity"></div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div
+                    class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-md border border-slate-100 animate-slide-up">
+                    <div class="bg-white px-6 pb-6 pt-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-extrabold text-rose-600 tracking-tight">Cancel Policy</h3>
+                            <button (click)="showCancelModal.set(false)" class="text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full p-1.5 transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                        </div>
+                        <p class="text-sm font-medium text-slate-500 mb-6 leading-relaxed">Are you sure you want to cancel policy <span class="font-bold text-slate-800">{{
+                            selectedPolicy()?.policyNumber }}</span>? This action requires review and may take effect by the
+                            end of the billing cycle.</p>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Reason for Cancellation <span class="text-red-500">*</span></label>
+                            <textarea [ngModel]="cancelReason()" (ngModelChange)="cancelReason.set($event)" rows="3"
+                                class="block w-full rounded-xl border border-slate-300 bg-slate-50 p-3 shadow-sm focus:outline-none focus:border-rose-500 focus:ring-2 focus:ring-rose-500 transition-all sm:text-sm font-medium"
+                                placeholder="Please provide a brief reason..."></textarea>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 px-6 py-4 flex flex-col-reverse sm:flex-row sm:justify-end gap-3 border-t border-slate-100">
+                        <button type="button" (click)="showCancelModal.set(false)"
+                            class="inline-flex w-full sm:w-auto justify-center rounded-xl bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm border border-slate-200 hover:bg-slate-50 transition-colors">Keep
+                            Policy</button>
+                        <button type="button" (click)="cancelPolicy()" [disabled]="actionLoading() || !cancelReason()"
+                            class="inline-flex w-full sm:w-auto justify-center items-center rounded-xl bg-rose-600 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-rose-500/30 hover:bg-rose-700 hover:-translate-y-0.5 disabled:opacity-50 disabled:transform-none disabled:shadow-none transition-all">
+                            <span *ngIf="actionLoading()" class="mr-2">
+                                <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            </span>
+                            {{ actionLoading() ? 'Cancelling...' : 'Confirm Cancel' }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Renew Modal Confirm Component -->
+    <app-confirm-modal [title]="'Renew Policy'"
+        [message]="'Are you sure you want to request a renewal for policy ' + selectedPolicy()?.policyNumber + '? Active rates will apply.'"
+        [visible]="showRenewModal()" (confirmed)="renewPolicy()" (cancelled)="showRenewModal.set(false)">
+    </app-confirm-modal>
+
+</div>

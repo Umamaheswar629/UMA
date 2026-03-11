@@ -1,0 +1,234 @@
+<div class="h-[calc(100vh-8rem)] flex flex-col space-y-6 relative animate-fade-in pb-4">
+    <div
+        class="flex justify-between items-center bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-sm border border-slate-100 flex-shrink-0">
+        <h2 class="text-2xl font-black tracking-tight text-slate-900 flex items-center gap-3">
+            <svg class="w-7 h-7 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            Managed Policies
+        </h2>
+        <div class="text-sm font-bold text-slate-500 bg-slate-50 px-4 py-2 border border-slate-100 rounded-xl">Total Policies: <span class="text-indigo-600 text-lg ml-1">{{ totalCount() }}</span></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-col sm:flex-row gap-4 bg-white/60 backdrop-blur-md p-3 rounded-2xl shadow-sm border border-slate-100 animate-slide-up">
+        <div class="relative w-full sm:w-80">
+            <input type="text" placeholder="Search customer or policy number..." [ngModel]="searchTerm()"
+                (ngModelChange)="onSearchChange($event)"
+                class="w-full px-4 py-3 pl-11 bg-white border border-slate-200 rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow shadow-sm">
+            <svg class="h-5 w-5 text-slate-400 absolute left-4 top-3.5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+        </div>
+        <select [ngModel]="statusFilter()" (ngModelChange)="statusFilter.set($event)"
+            class="block w-full sm:w-56 px-4 py-3 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm cursor-pointer hover:border-slate-300 transition-colors">
+            <option value="">All Statuses</option>
+            <option value="PendingApproval">Pending Approval</option>
+            <option value="Active">Active</option>
+            <option value="Expired">Expired</option>
+            <option value="Cancelled">Cancelled</option>
+        </select>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-1 overflow-hidden bg-white rounded-2xl shadow-sm border border-slate-100 flex flex-col animate-slide-up delay-100">
+        <div class="overflow-x-auto flex-1">
+            <table class="min-w-full divide-y divide-slate-100">
+                <thead class="bg-slate-50 sticky top-0 z-0">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Policy #</th>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Customer</th>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Type / Tier</th>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Premium</th>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-black text-slate-500 uppercase tracking-wider bg-slate-50">Valid Dates</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-slate-50">
+                    @if (loading()) {
+                    <tr>
+                        <td colspan="6" class="px-6 py-8">
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="skeleton-row w-24"></div>
+                                    <div class="skeleton-row flex-1"></div>
+                                    <div class="skeleton-row w-28"></div>
+                                    <div class="skeleton-row w-20"></div>
+                                    <div class="skeleton-row w-16"></div>
+                                    <div class="skeleton-row w-28"></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="skeleton-row w-24" style="animation-delay:0.3s"></div>
+                                    <div class="skeleton-row flex-1" style="animation-delay:0.3s"></div>
+                                    <div class="skeleton-row w-28" style="animation-delay:0.4s"></div>
+                                    <div class="skeleton-row w-20" style="animation-delay:0.4s"></div>
+                                    <div class="skeleton-row w-16" style="animation-delay:0.5s"></div>
+                                    <div class="skeleton-row w-28" style="animation-delay:0.5s"></div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="skeleton-row w-24" style="animation-delay:0.6s"></div>
+                                    <div class="skeleton-row flex-1" style="animation-delay:0.6s"></div>
+                                    <div class="skeleton-row w-28" style="animation-delay:0.7s"></div>
+                                    <div class="skeleton-row w-20" style="animation-delay:0.7s"></div>
+                                    <div class="skeleton-row w-16" style="animation-delay:0.8s"></div>
+                                    <div class="skeleton-row w-28" style="animation-delay:0.8s"></div>
+                                </div>
+                            </div>
+                            <div class="flex justify-center items-center gap-2 mt-6">
+                                <div class="loader-dots"><span></span><span></span><span></span></div>
+                                <span class="text-xs font-bold text-slate-400 ml-2">Loading policies</span>
+                            </div>
+                        </td>
+                    </tr>
+                    } @else if (policies().length === 0) {
+                    <tr>
+                        <td colspan="6" class="px-6 py-12 text-center text-sm font-medium text-slate-500 italic">No managed policies found matching criteria.</td>
+                    </tr>
+                    } @else {
+                    @for (p of policies(); track p.policyId) {
+                    <tr (click)="selectPolicy(p.policyId)" class="hover:bg-indigo-50/50 cursor-pointer transition-colors group">
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-black text-indigo-600 group-hover:text-indigo-800 transition-colors">{{ p.policyNumber }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-900">{{ p.customerName || p.customerId }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm px-3">
+                            <div class="font-bold text-slate-900">{{ p.tierName }}</div>
+                            <div class="text-xs font-medium text-slate-500">{{ p.insuranceTypeName }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-black text-slate-900">₹{{ p.premiumAmount.toLocaleString('en-IN') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap"><app-badge [status]="p.status"></app-badge></td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-slate-500">
+                            <div class="text-xs">{{ p.startDate | date:'dd MMM yyyy' }} - </div>
+                            <div class="text-xs" [ngClass]="p.status === 'Active' ? 'text-indigo-600 font-bold' : 'text-slate-400'">{{ p.endDate | date:'dd MMM yyyy' }}</div>
+                        </td>
+                    </tr>
+                    }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="p-3 border-t border-slate-100 bg-slate-50 flex justify-center">
+            @if (totalPages() > 1) {
+            <app-pagination [currentPage]="currentPage()" [totalPages]="totalPages()"
+                (pageChange)="currentPage.set($event)">
+            </app-pagination>
+            }
+        </div>
+    </div>
+
+    <!-- Slide-over Panel for Detail -->
+    @if (selectedPolicy()) {
+    <div class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[60] transition-opacity animate-fade-in" (click)="selectedPolicy.set(null)"></div>
+    <div class="fixed inset-y-0 right-0 w-full sm:w-[28rem] bg-white shadow-2xl border-l border-slate-200 z-[70] flex flex-col transform transition-transform animate-slide-up sm:animate-none" style="animation: slideInRight 0.3s ease-out forwards;">
+        <div class="px-6 py-5 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex justify-between items-center sticky top-0">
+            <div>
+                <h3 class="text-xl font-black text-slate-900 tracking-tight">{{ selectedPolicy()!.policyNumber }}</h3>
+                <app-badge [status]="selectedPolicy()!.status"></app-badge>
+            </div>
+            <div class="flex items-center gap-3">
+                @if (selectedPolicy()!.status === 'PendingApproval') {
+                <button (click)="approvePolicy(selectedPolicy()!.policyId)"
+                    class="inline-flex items-center px-4 py-2 text-sm font-bold rounded-xl text-white bg-emerald-600 hover:bg-emerald-700 shadow-sm shadow-emerald-500/30 transition-all hover:-translate-y-0.5">
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                    Approve
+                </button>
+                }
+                <button (click)="selectedPolicy.set(null)"
+                    class="text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-full p-2.5 transition-colors focus:outline-none">
+                    <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6 space-y-8 bg-slate-50/50">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div class="text-xs font-black uppercase tracking-widest text-indigo-500 mb-1">Premium</div>
+                    <div class="text-xl font-black text-slate-900">₹{{
+                        selectedPolicy()!.premiumAmount.toLocaleString('en-IN') }}</div>
+                </div>
+                <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                    <div class="text-xs font-black uppercase tracking-widest text-slate-500 mb-1">Coverage Limit</div>
+                    <div class="text-xl font-black text-slate-900">₹{{
+                        selectedPolicy()!.coverageLimit.toLocaleString('en-IN') }}</div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h4 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-4 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Included Features
+                </h4>
+                <ul class="space-y-2">
+                    @for (f of selectedPolicy()!.features; track f) {
+                    <li class="text-sm font-bold text-slate-700 flex items-start gap-2">
+                        <svg class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        {{ f }}
+                    </li>
+                    }
+                </ul>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h4 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-4 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"></path></svg>
+                    Billing Invoices
+                </h4>
+                @if (selectedPolicy()!.invoices.length === 0) {
+                <div class="text-sm font-medium text-slate-400 italic bg-slate-50 p-4 rounded-xl text-center">No invoices generated yet.</div>
+                } @else {
+                <div class="space-y-3">
+                    @for (inv of selectedPolicy()!.invoices; track inv.invoiceId) {
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 flex justify-between items-center hover:bg-slate-100 transition-colors">
+                        <div>
+                            <div class="font-black text-slate-900 text-sm">{{ inv.invoiceNumber }}</div>
+                            <div class="text-xs font-bold text-slate-500 mt-0.5">Due: {{ inv.dueDate | date:'dd MMM yyyy' }}</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="font-black text-indigo-700">₹{{ inv.amount.toLocaleString('en-IN') }}</div>
+                            <div class="mt-1"><app-badge [status]="inv.status"></app-badge></div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <h4 class="text-xs font-black uppercase tracking-widest text-slate-500 mb-4 border-b border-slate-100 pb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Filed Claims
+                </h4>
+                @if (selectedPolicy()!.claims.length === 0) {
+                <div class="text-sm font-medium text-slate-400 italic bg-slate-50 p-4 rounded-xl text-center">No claims associated with this policy.</div>
+                } @else {
+                <div class="space-y-3">
+                    @for (claim of selectedPolicy()!.claims; track claim.claimNumber) {
+                    <div class="bg-rose-50/50 p-3 rounded-xl border border-rose-100 flex justify-between items-center">
+                        <div>
+                            <div class="font-black text-rose-700 text-sm">{{ claim.claimNumber }}</div>
+                            <div class="text-xs font-bold text-slate-500 mt-0.5">Filed: {{ claim.filedAt | date:'dd MMM yyyy' }}</div>
+                        </div>
+                        <div><app-badge [status]="claim.status"></app-badge></div>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="bg-slate-100 h-px w-full my-4"></div>
+        </div>
+    </div>
+    }
+</div>
+
+<style>
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+</style>
